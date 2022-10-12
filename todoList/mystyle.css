@@ -1,0 +1,14 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Courier New', Courier, monospace;
+    background: linear-gradient(-45deg, lightgrey, lightblue);
+}
+.checked{
+    text-decoration: line-through;
+    opacity: .5;
+}
