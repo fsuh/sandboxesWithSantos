@@ -2,6 +2,8 @@
 const form = document.querySelector('form');
 const taskInput = document.querySelector('#task_input');
 const dueDate = document.querySelector('#task_date');
+const startTime = document.querySelector('#time_from')
+const endTime = document.querySelector('#time_to')
 const desText = document.querySelector('#task_Description');
 const taskDisplay = document.querySelector('.task_list');
 const isChecked = document.querySelector('input[type="checkbox"]')
@@ -14,6 +16,8 @@ let data = () =>{
     taskArray.push({
         task: taskInput.value.trim(),
         date: dueDate.value,
+        start: startTime.value,
+        end: endTime.value,
         taskDes: desText.value,
     });
     localStorage.setItem('taskArray', JSON.stringify(taskArray));
@@ -28,8 +32,10 @@ let DisplayTask = () => {
     taskArray.map((todo) => {
         return(taskDisplay.innerHTML += `
         <li>
-            <span class='bold'>${todo.task}</span>
-            <span class='small_text'>${todo.date}</span>
+            <span>${todo.task}</span>
+            <span>Due on: ${todo.date}, </span>
+            <span>From: ${todo.start}, </span>
+            <span>to: ${todo.end}</span>
             <p>${todo.taskDes}</p>
 
             <span class='icons'>
@@ -55,7 +61,9 @@ let deleteTask = (e) => {
 
     taskInput.value = selectedTask.children[0].innerHTML;
     dueDate.value = selectedTask.children[1].innerHTML;
-    desText.value = selectedTask.children[2].innerHTML;
+    startTime.value = selectedTask.children[2].innerHTML;
+    endTime.value = selectedTask.children[3].innerHTML;
+    desText.value = selectedTask.children[4].innerHTML;
 
     deleteTask(e);
  }
@@ -67,9 +75,7 @@ let formValidation = () => {
         taskInput.focus();
         taskDisplay.innerHTML= 'Task cannot be blank';
         form.reset();
-        console.log('failure');
     }else {
-        console.log('success');
         data();
         form.reset();
     }
